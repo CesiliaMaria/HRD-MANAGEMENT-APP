@@ -35,6 +35,10 @@
             background: rgba(255,255,255,0.2);
             font-weight: bold;
         }
+        .sidebar .badge {
+            float: right;
+            margin-top: 2px;
+        }
         .navbar-brand {
             font-weight: bold;
             color: #667eea !important;
@@ -56,6 +60,14 @@
             color: #667eea;
             font-weight: bold;
         }
+        .menu-section {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 20px 20px 10px 20px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -67,27 +79,71 @@
                     <h4 class="text-white text-center mb-4">
                         <i class="fas fa-users-cog"></i> HRD System
                     </h4>
+                    
                     <ul class="nav flex-column">
+                        <!-- Menu Utama -->
                         <li class="nav-item">
                             <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                                 <i class="fas fa-tachometer-alt me-2"></i> Dashboard
                             </a>
                         </li>
+                        
+                        <!-- Section: Kehadiran & Lembur -->
+                        <div class="menu-section">Kehadiran</div>
+                        
                         <li class="nav-item">
                             <a class="nav-link {{ Request::is('attendances*') ? 'active' : '' }}" href="{{ route('attendances.index') }}">
                                 <i class="fas fa-calendar-check me-2"></i> Absensi
                             </a>
                         </li>
+                        
+                        <!-- Menu Lembur dengan Badge untuk Admin -->
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::is('salaries*') ? 'active' : '' }}" href="{{ route('salaries.index') }}">
-                                <i class="fas fa-money-bill-wave me-2"></i> Payroll
+                            <a class="nav-link {{ Request::is('overtimes*') ? 'active' : '' }}" href="{{ route('overtimes.index') }}">
+                                <i class="fas fa-clock me-2"></i> 
+                                @auth
+                                    @if(auth()->user()->isAdmin() || auth()->user()->isManager())
+                                        Kelola Lembur
+                                        @php
+                                            $pendingCount = \App\Models\OvertimeRequest::where('status', 'pending')->count();
+                                        @endphp
+                                        @if($pendingCount > 0)
+                                            <span class="badge bg-danger">{{ $pendingCount }}</span>
+                                        @endif
+                                    @else
+                                        Lembur Saya
+                                    @endif
+                                @else
+                                    Lembur
+                                @endauth
                             </a>
                         </li>
+                        
+                        <!-- Section: Penggajian -->
+                        <div class="menu-section">Penggajian</div>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('salaries*') ? 'active' : '' }}" href="{{ route('salaries.index') }}">
+                                <i class="fas fa-money-bill-wave me-2"></i> 
+                                @auth
+                                    @if(auth()->user()->isAdmin() || auth()->user()->isManager())
+                                        Kelola Payroll
+                                    @else
+                                        Slip Gaji
+                                    @endif
+                                @else
+                                    Payroll
+                                @endauth
+                            </a>
+                        </li>
+                        
+                        <!-- Section: Manajemen (Admin Only) -->
                         @auth
                             @if(auth()->user()->isAdmin() || auth()->user()->isManager())
+                            <div class="menu-section">Manajemen</div>
                             <li class="nav-item">
                                 <a class="nav-link {{ Request::is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
-                                    <i class="fas fa-users me-2"></i> Manage Users
+                                    <i class="fas fa-users me-2"></i> Kelola User
                                 </a>
                             </li>
                             @endif
