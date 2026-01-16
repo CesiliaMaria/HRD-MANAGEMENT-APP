@@ -23,6 +23,39 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
+                            <label for="period_month" class="form-label">Bulan Periode</label>
+                            <select class="form-select" id="period_month" name="period_month" required>
+                                <option value="">-- Pilih Bulan --</option>
+                                <option value="1">Januari</option>
+                                <option value="2">Februari</option>
+                                <option value="3">Maret</option>
+                                <option value="4">April</option>
+                                <option value="5">Mei</option>
+                                <option value="6">Juni</option>
+                                <option value="7">Juli</option>
+                                <option value="8">Agustus</option>
+                                <option value="9">September</option>
+                                <option value="10">Oktober</option>
+                                <option value="11">November</option>
+                                <option value="12">Desember</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="period_year" class="form-label">Tahun Periode</label>
+                            <select class="form-select" id="period_year" name="period_year" required>
+                                <option value="">-- Pilih Tahun --</option>
+                                @for($year = date('Y') - 1; $year <= date('Y') + 1; $year++)
+                                    <option value="{{ $year }}" {{ $year == date('Y') ? 'selected' : '' }}>
+                                        {{ $year }}
+                                    </option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
                             <label for="basic_salary" class="form-label">Gaji Pokok</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
@@ -41,17 +74,16 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="overtime_pay" class="form-label">Bayaran Lembur</label>
-                            <div class="input-group">
-                                <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="overtime_pay" name="overtime_pay" 
-                                       value="0" min="0" step="1000" placeholder="0">
-                            </div>
+                    <div class="mb-3">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Info Lembur:</strong> Lembur akan dihitung otomatis dari data lembur yang 
+                            telah disetujui untuk periode ini.
                         </div>
+                    </div>
 
-                        <div class="col-md-6 mb-3">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
                             <label for="tax" class="form-label">Pajak</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>

@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\SalaryController;
+use App\Http\Controllers\OvertimeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 
@@ -40,6 +41,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/salaries/create', [SalaryController::class, 'create'])->name('salaries.create');
     Route::post('/salaries', [SalaryController::class, 'store'])->name('salaries.store');
     Route::post('/salaries/{id}/process-payment', [SalaryController::class, 'processPayment'])->name('salaries.process-payment');
+    Route::get('/salaries/{salary}/slip', [SalaryController::class, 'downloadSlip'])->name('salaries.download-slip');
+    
+    // Overtime Routes
+    Route::get('/overtimes', [OvertimeController::class, 'index'])->name('overtimes.index');
+    Route::get('/overtimes/create', [OvertimeController::class, 'create'])->name('overtimes.create');
+    Route::post('/overtimes', [OvertimeController::class, 'store'])->name('overtimes.store');
+    Route::get('/overtimes/{overtime}', [OvertimeController::class, 'show'])->name('overtimes.show');
+    Route::post('/overtimes/{overtime}/approve', [OvertimeController::class, 'approve'])->name('overtimes.approve');
+    Route::post('/overtimes/{overtime}/reject', [OvertimeController::class, 'reject'])->name('overtimes.reject');
+    Route::delete('/overtimes/{overtime}', [OvertimeController::class, 'destroy'])->name('overtimes.destroy');
     
     // User Management Routes
     Route::get('/users', [UserController::class, 'index'])->name('users.index');

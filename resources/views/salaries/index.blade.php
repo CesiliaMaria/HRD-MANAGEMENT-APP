@@ -26,13 +26,13 @@
                                 @if(auth()->user()->isAdmin() || auth()->user()->isManager())
                                 <th>Karyawan</th>
                                 @endif
+                                <th>Periode</th>
                                 <th>Gaji Pokok</th>
                                 <th>Tunjangan</th>
                                 <th>Lembur</th>
                                 <th>Pajak</th>
                                 <th>Total</th>
                                 <th>Status</th>
-                                <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -43,9 +43,19 @@
                                 @if(auth()->user()->isAdmin() || auth()->user()->isManager())
                                 <td>{{ $salary->user->name }}</td>
                                 @endif
+                                <td>
+                                    <span class="badge bg-info text-dark">
+                                        {{ $salary->period_label }}
+                                    </span>
+                                </td>
                                 <td>Rp {{ number_format($salary->basic_salary, 0, ',', '.') }}</td>
                                 <td>Rp {{ number_format($salary->allowance, 0, ',', '.') }}</td>
-                                <td>Rp {{ number_format($salary->overtime_pay, 0, ',', '.') }}</td>
+                                <td>
+                                    <span data-bs-toggle="tooltip" 
+                                          title="{{ $salary->overtime_hours }} jam × Rp {{ number_format($salary->overtime_rate, 0, ',', '.') }}">
+                                        Rp {{ number_format($salary->overtime_pay, 0, ',', '.') }}
+                                    </span>
+                                </td>
                                 <td>Rp {{ number_format($salary->tax, 0, ',', '.') }}</td>
                                 <td><strong>Rp {{ number_format($salary->total_salary, 0, ',', '.') }}</strong></td>
                                 <td>
@@ -55,10 +65,16 @@
                                         <span class="badge bg-warning">Pending</span>
                                     @endif
                                 </td>
-                                <td>{{ $salary->created_at->format('d/m/Y') }}</td>
                                 <td>
+                                    <a href="{{ route('salaries.download-slip', $salary->id) }}" 
+                                       class="btn btn-sm btn-primary" 
+                                       target="_blank">
+                                        <i class="fas fa-download me-1"></i> Slip
+                                    </a>
+                                    
                                     @if(auth()->user()->isAdmin() && $salary->payment_status == 'pending')
-                                    <form action="{{ route('salaries.process-payment', $salary->id) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('salaries.process-payment', $salary->id) }}" 
+                                          method="POST" class="d-inline">
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-success" 
                                                 onclick="return confirm('Proses pembayaran gaji?')">
