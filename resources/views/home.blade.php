@@ -48,8 +48,8 @@
         <!-- Admin Dashboard Cards -->
         <div class="col-md-3 mb-3">
             <div class="card stat-card text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                <div class="card-body d-flex flex-column" style="min-height: 140px;">
+                    <div class="d-flex justify-content-between align-items-center flex-grow-1">
                         <div>
                             <h6 class="text-white-50">Total Karyawan</h6>
                             <h2 class="mb-0">{{ $totalEmployees }}</h2>
@@ -64,7 +64,7 @@
         
         <div class="col-md-3 mb-3">
             <div class="card stat-card text-white" style="background: linear-gradient(45deg, #f093fb, #f5576c);">
-                <div class="card-body">
+                <div class="card-body d-flex flex-column" style="min-height: 140px;">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h6 class="text-white-50">Lembur Pending</h6>
@@ -74,7 +74,7 @@
                             <i class="fas fa-clock"></i>
                         </div>
                     </div>
-                    <a href="{{ route('overtimes.index', ['status' => 'pending']) }}" class="btn btn-sm btn-light mt-2">
+                    <a href="{{ route('overtimes.index', ['status' => 'pending']) }}" class="btn btn-sm btn-light mt-auto">
                         <i class="fas fa-check me-1"></i> Review
                     </a>
                 </div>
@@ -83,8 +83,8 @@
         
         <div class="col-md-3 mb-3">
             <div class="card stat-card text-white" style="background: linear-gradient(45deg, #4facfe, #00f2fe);">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                <div class="card-body d-flex flex-column" style="min-height: 140px;">
+                    <div class="d-flex justify-content-between align-items-center flex-grow-1">
                         <div>
                             <h6 class="text-white-50">Gaji Pending</h6>
                             <h2 class="mb-0">{{ $pendingSalaries }}</h2>
@@ -99,8 +99,8 @@
         
         <div class="col-md-3 mb-3">
             <div class="card stat-card text-white" style="background: linear-gradient(45deg, #43e97b, #38f9d7);">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                <div class="card-body d-flex flex-column" style="min-height: 140px;">
+                    <div class="d-flex justify-content-between align-items-center flex-grow-1">
                         <div>
                             <h6 class="text-white-50">Absen Hari Ini</h6>
                             <h2 class="mb-0">{{ $todayAttendances }}</h2>
@@ -116,8 +116,8 @@
         <!-- Employee Dashboard Cards -->
         <div class="col-md-3 mb-3">
             <div class="card stat-card text-white">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                <div class="card-body d-flex flex-column" style="min-height: 140px;">
+                    <div class="d-flex justify-content-between align-items-center flex-grow-1">
                         <div>
                             <h6 class="text-white-50">Lembur Bulan Ini</h6>
                             <h2 class="mb-0">{{ $myOvertimes }}</h2>
@@ -133,8 +133,8 @@
         
         <div class="col-md-3 mb-3">
             <div class="card stat-card text-white" style="background: linear-gradient(45deg, #43e97b, #38f9d7);">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                <div class="card-body d-flex flex-column" style="min-height: 140px;">
+                    <div class="d-flex justify-content-between align-items-center flex-grow-1">
                         <div>
                             <h6 class="text-white-50">Jam Lembur Approved</h6>
                             <h2 class="mb-0">{{ number_format($myApprovedOvertimes, 1) }}</h2>
@@ -150,8 +150,8 @@
         
         <div class="col-md-3 mb-3">
             <div class="card stat-card text-white" style="background: linear-gradient(45deg, #f093fb, #f5576c);">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                <div class="card-body d-flex flex-column" style="min-height: 140px;">
+                    <div class="d-flex justify-content-between align-items-center flex-grow-1">
                         <div>
                             <h6 class="text-white-50">Lembur Pending</h6>
                             <h2 class="mb-0">{{ $myPendingOvertimes }}</h2>
@@ -167,8 +167,8 @@
         
         <div class="col-md-3 mb-3">
             <div class="card stat-card text-white" style="background: linear-gradient(45deg, #4facfe, #00f2fe);">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                <div class="card-body d-flex flex-column" style="min-height: 140px;">
+                    <div class="d-flex justify-content-between align-items-center flex-grow-1">
                         <div>
                             <h6 class="text-white-50">Absensi Bulan Ini</h6>
                             <h2 class="mb-0">{{ $myAttendances }}</h2>

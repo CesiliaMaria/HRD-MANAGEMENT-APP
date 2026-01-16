@@ -35,9 +35,17 @@
             background: rgba(255,255,255,0.2);
             font-weight: bold;
         }
+        .sidebar .nav-link {
+            position: relative;
+            display: block;
+        }
         .sidebar .badge {
-            float: right;
-            margin-top: 2px;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
         }
         .navbar-brand {
             font-weight: bold;
@@ -59,6 +67,22 @@
         .page-title {
             color: #667eea;
             font-weight: bold;
+        }
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .table {
+            min-width: 800px;
+            white-space: nowrap;
+        }
+        .table td, .table th {
+            padding: 1rem 0.75rem;
+            vertical-align: middle;
+        }
+        .table .btn {
+            margin: 0.25rem;
+            white-space: nowrap;
         }
         .menu-section {
             color: rgba(255,255,255,0.6);

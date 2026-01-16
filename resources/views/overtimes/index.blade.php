@@ -79,24 +79,30 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('overtimes.show', $overtime) }}" class="btn btn-sm btn-info">Detail</a>
-                                
-                                @if(auth()->user()->role_id == 1 && $overtime->status == 'pending')
-                                    <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#approveModal{{ $overtime->id }}">
-                                        Approve
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal{{ $overtime->id }}">
-                                        Reject
-                                    </button>
-                                @endif
+                                <div class="d-flex flex-wrap gap-1">
+                                    <a href="{{ route('overtimes.show', $overtime) }}" class="btn btn-sm btn-info">
+                                        <i class="fas fa-eye me-1"></i>Detail
+                                    </a>
+                                    
+                                    @if(auth()->user()->role_id == 1 && $overtime->status == 'pending')
+                                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#approveModal{{ $overtime->id }}">
+                                            <i class="fas fa-check me-1"></i>Approve
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal{{ $overtime->id }}">
+                                            <i class="fas fa-times me-1"></i>Reject
+                                        </button>
+                                    @endif
 
-                                @if($overtime->user_id == auth()->id() && $overtime->status == 'pending')
-                                    <form action="{{ route('overtimes.destroy', $overtime) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus?')">Hapus</button>
-                                    </form>
-                                @endif
+                                    @if($overtime->user_id == auth()->id() && $overtime->status == 'pending')
+                                        <form action="{{ route('overtimes.destroy', $overtime) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus?')">
+                                                <i class="fas fa-trash me-1"></i>Hapus
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
                             </td>
                         </tr>
 

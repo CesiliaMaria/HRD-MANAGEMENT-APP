@@ -66,22 +66,24 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('salaries.download-slip', $salary->id) }}" 
-                                       class="btn btn-sm btn-primary" 
-                                       target="_blank">
-                                        <i class="fas fa-download me-1"></i> Slip
-                                    </a>
-                                    
-                                    @if(auth()->user()->isAdmin() && $salary->payment_status == 'pending')
-                                    <form action="{{ route('salaries.process-payment', $salary->id) }}" 
-                                          method="POST" class="d-inline">
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-success" 
-                                                onclick="return confirm('Proses pembayaran gaji?')">
-                                            <i class="fas fa-credit-card me-1"></i> Bayar
-                                        </button>
-                                    </form>
-                                    @endif
+                                    <div class="d-flex flex-wrap gap-1">
+                                        <a href="{{ route('salaries.download-slip', $salary->id) }}" 
+                                           class="btn btn-sm btn-primary" 
+                                           target="_blank">
+                                            <i class="fas fa-download me-1"></i> Slip
+                                        </a>
+                                        
+                                        @if(auth()->user()->isAdmin() && $salary->payment_status == 'pending')
+                                        <form action="{{ route('salaries.process-payment', $salary->id) }}" 
+                                              method="POST" class="d-inline">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-success" 
+                                                    onclick="return confirm('Proses pembayaran gaji?')">
+                                                <i class="fas fa-credit-card me-1"></i> Bayar
+                                            </button>
+                                        </form>
+                                        @endif
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
