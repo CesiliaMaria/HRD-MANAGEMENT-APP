@@ -22,6 +22,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nama</th>
+                                <th>NIP</th>
+                                <th>Jabatan</th>
                                 <th>Email</th>
                                 <th>Role</th>
                                 <th>Tanggal Daftar</th>
@@ -40,6 +42,8 @@
                                         {{ $user->name }}
                                     </div>
                                 </td>
+                                <td>{{ $user->nip ?? '-' }}</td>
+                                <td>{{ $user->position ?? '-' }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     @if($user->role->name == 'admin')

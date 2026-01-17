@@ -36,6 +36,8 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'nip' => 'nullable|string|max:255|unique:users',
+            'position' => 'nullable|string|max:255',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role_id' => 'required|exists:roles,id',
         ]);
@@ -43,6 +45,8 @@ class UserController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'nip' => $request->nip,
+            'position' => $request->position,
             'password' => Hash::make($request->password),
             'role_id' => $request->role_id,
         ]);
@@ -67,12 +71,16 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'nip' => 'nullable|string|max:255|unique:users,nip,' . $user->id,
+            'position' => 'nullable|string|max:255',
             'password' => 'nullable|confirmed|min:8',
             'role_id' => 'required|exists:roles,id',
         ]);
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->nip = $request->nip;
+        $user->position = $request->position;
         $user->role_id = $request->role_id;
 
         if ($request->password) {

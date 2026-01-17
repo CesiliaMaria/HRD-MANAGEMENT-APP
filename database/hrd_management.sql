@@ -57,6 +57,8 @@ CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `nip` varchar(255) DEFAULT NULL,
+  `position` varchar(255) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
@@ -65,6 +67,7 @@ CREATE TABLE `users` (
   `role_id` bigint(20) UNSIGNED NOT NULL DEFAULT 3,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`),
+  UNIQUE KEY `users_nip_unique` (`nip`),
   KEY `users_role_id_foreign` (`role_id`),
   CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -268,7 +271,8 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2025_09_30_065806_create_personal_access_tokens_table', 1),
 ('2025_09_30_085857_update_latitude_longitude_precision_in_attendances_table', 1),
 ('2026_01_17_000001_create_overtime_requests_table', 1),
-('2026_01_17_000002_add_period_and_overtime_to_salaries_table', 1);
+('2026_01_17_000002_add_period_and_overtime_to_salaries_table', 1),
+('2026_01_17_000003_add_position_and_nip_to_users_table', 1);
 
 -- ============================================
 -- INSERT DATA: roles
@@ -283,14 +287,14 @@ INSERT INTO `roles` (`id`, `name`, `description`, `created_at`, `updated_at`) VA
 -- Password untuk semua user: password
 -- Hash: $2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
 -- ============================================
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role_id`) VALUES
-(1, 'Admin HRD', 'admin@hrd.com', NOW(), '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NOW(), NOW(), 1),
-(2, 'Manager Operasional', 'manager@hrd.com', NOW(), '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NOW(), NOW(), 2),
-(3, 'Budi Santoso', 'budi@hrd.com', NOW(), '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NOW(), NOW(), 3),
-(4, 'Siti Rahayu', 'siti@hrd.com', NOW(), '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NOW(), NOW(), 3),
-(5, 'Ahmad Wijaya', 'ahmad@hrd.com', NOW(), '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NOW(), NOW(), 3),
-(6, 'Dewi Lestari', 'dewi@hrd.com', NOW(), '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NOW(), NOW(), 3),
-(7, 'Rudi Hartono', 'rudi@hrd.com', NOW(), '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NOW(), NOW(), 3);
+INSERT INTO `users` (`id`, `name`, `email`, `nip`, `position`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role_id`) VALUES
+(1, 'Admin HRD', 'admin@hrd.com', 'NIP-2020-001', 'Administrator HRD', NOW(), '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NOW(), NOW(), 1),
+(2, 'Manager Operasional', 'manager@hrd.com', 'NIP-2020-002', 'Manager Operasional', NOW(), '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NOW(), NOW(), 2),
+(3, 'Budi Santoso', 'budi@hrd.com', 'NIP-2021-003', 'Staff IT', NOW(), '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NOW(), NOW(), 3),
+(4, 'Siti Rahayu', 'siti@hrd.com', 'NIP-2021-004', 'Staff HRD', NOW(), '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NOW(), NOW(), 3),
+(5, 'Ahmad Wijaya', 'ahmad@hrd.com', 'NIP-2022-005', 'Staff Finance', NOW(), '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NOW(), NOW(), 3),
+(6, 'Dewi Lestari', 'dewi@hrd.com', 'NIP-2022-006', 'Staff Marketing', NOW(), '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NOW(), NOW(), 3),
+(7, 'Rudi Hartono', 'rudi@hrd.com', 'NIP-2023-007', 'Staff Operasional', NOW(), '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NOW(), NOW(), 3);
 
 -- ============================================
 -- INSERT DATA: attendances (Sample Data)

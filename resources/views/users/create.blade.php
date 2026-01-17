@@ -30,6 +30,24 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="nip" class="form-label">NIP (Nomor Induk Pegawai)</label>
+                        <input type="text" class="form-control @error('nip') is-invalid @enderror" 
+                               id="nip" name="nip" value="{{ old('nip') }}">
+                        @error('nip')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="position" class="form-label">Jabatan</label>
+                        <input type="text" class="form-control @error('position') is-invalid @enderror" 
+                               id="position" name="position" value="{{ old('position') }}">
+                        @error('position')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
                         <label for="role_id" class="form-label">Role</label>
                         <select class="form-select @error('role_id') is-invalid @enderror" id="role_id" name="role_id" required>
                             <option value="">-- Pilih Role --</option>
